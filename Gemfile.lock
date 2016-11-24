@@ -106,6 +106,7 @@ DEPENDENCIES
   faker
   hirb
   httparty
+  json
   pg
   pry
   rack-test

@@ -19,6 +19,7 @@ gem 'awesome_print'
 
 gem 'faker'
 gem 'hirb'
+gem 'json'
 
 group :test do
   gem 'shoulda-matchers'
