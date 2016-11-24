@@ -86,5 +86,5 @@ view model =
   , Html.input [ type_ "password", name "password", onInput ChangePassword] []
   , div [] []
   --, div [] [ text model.passwordErrors ]
-  , div [onClick Login] [text "Push me to Login!"]
+  , button [onClick Login] [text "Push me to Login!"]
   ]
