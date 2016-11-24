@@ -1,5 +1,6 @@
 import Html exposing (..)
 import Html.Events exposing (..)
+import Html.Attributes exposing (..)
 import Random
 
 
@@ -16,15 +17,17 @@ main =
 
 -- MODEL
 
-
 type alias Model =
-  { message : String
+  { username : String
+  , password : String
+  --, usernameErrors : String
+  --, passwordErrors : String
   }
 
 
 init : (Model, Cmd Msg)
 init =
-  ( Model "Hello World!"
+  ( Model "" ""
   , Cmd.none)
 
 
@@ -33,14 +36,24 @@ init =
 
 
 type Msg
-  = ChangeMessage String
+  = Login
+  | ChangeUsername String
+  | ChangePassword String
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    ChangeMessage (newMessage) ->
-      (Model newMessage, Cmd.none)
+    Login ->
+      (model, Cmd.none)
+
+    ChangeUsername newUsername ->
+      ( { model | username = newUsername }, Cmd.none )
+
+    ChangePassword newPassword ->
+      ( { model | password = newPassword }, Cmd.none )
+
+
 
 
 
@@ -57,8 +70,21 @@ subscriptions model =
 
 
 --view : Model -> Html Msg
-view model =
+--view model =
+--  div []
+--    [ h1 [] [ text (toString model.message) ]
+--    , button [ onClick (Login "asdf" "asdf") ] [ text "Login Button" ]
+--    ]
+
+view : Model -> Html Msg
+view model = 
   div []
-    [ h1 [] [ text (toString model.message) ]
-    , button [ onClick (ChangeMessage "asdf") ] [ text "ChangeMessage" ]
-    ]
+  [ h1 [] [text "Login Form"]
+  , Html.input [ type_ "text", name "username", onInput ChangeUsername] []
+  , div [] []
+  --, div [] [ text model.usernameErrors ]
+  , Html.input [ type_ "password", name "password", onInput ChangePassword] []
+  , div [] []
+  --, div [] [ text model.passwordErrors ]
+  , div [onClick Login] [text "Push me to Login!"]
+  ]
