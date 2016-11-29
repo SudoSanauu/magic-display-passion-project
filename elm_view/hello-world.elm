@@ -3,8 +3,6 @@ import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Random
 
-
-
 main =
   Html.program
     { init = init
@@ -20,6 +18,7 @@ main =
 type alias Model =
   { username : String
   , password : String
+  , show : Bool
   --, usernameErrors : String
   --, passwordErrors : String
   }
@@ -27,7 +26,7 @@ type alias Model =
 
 init : (Model, Cmd Msg)
 init =
-  ( Model "" ""
+  ( Model "" "" False
   , Cmd.none)
 
 
@@ -87,4 +86,5 @@ view model =
   , div [] []
   --, div [] [ text model.passwordErrors ]
   , button [onClick Login] [text "Push me to Login!"]
+  , h3 [] [text (model.username ++ " " ++ model.password)]
   ]
